@@ -6,10 +6,11 @@ from sqlalchemy.exc import IntegrityError
 from ..security import password_hash, verify_password, get_password_hash, create_access_token, hash_token
 from ..models import User, UserSession
 from app.main import limiter
-from app.dependencies import get_db
-from ..schemas import UserRegistration, UserLogin, UserResponse, Token, RefreshRequest
+from app.dependencies import get_db, get_current_user
+from ..schemas import UserRegistration, UserLogin, UserResponse, Token, RefreshRequest, UserProfile
+from app.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 router = APIRouter(prefix="/auth", tags=["Authentication Pipeline"])
 
 @router.get("/home")
@@ -68,6 +69,10 @@ def login(request : Request, user : UserLogin, db : Session = Depends(get_db), u
          
       else :
             raise HTTPException(status_code=401, detail="User Login Invalid")
+
+@router.get("/profile", response_model=UserProfile)
+def profile(user : User = Depends(get_current_user), db : Session = Depends(get_db)):
+    return user
          
 
 @router.post("/refresh", response_model=Token)
