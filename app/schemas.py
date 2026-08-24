@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
+from datetime import datetime
 
 class UserRegistration(BaseModel) :
       email : EmailStr
@@ -18,3 +19,18 @@ class Token(BaseModel) :
 class RefreshRequest(BaseModel):
     refresh_token: str
 
+# Schema representing individual active sessions
+class UserSessionResponse(BaseModel):
+    id: int
+    user_agent: str | None = None
+    expires_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+# Profile response including the nested sessions list
+class UserProfile(BaseModel):
+    id: int
+    email: EmailStr
+    sessions: list[UserSessionResponse] = []
+
+    model_config = ConfigDict(from_attributes=True)
