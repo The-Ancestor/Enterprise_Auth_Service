@@ -52,9 +52,9 @@ A production-ready, test-driven authentication microservice built with **FastAPI
    cd Enterprise_Auth_Service
 
    python3 -m venv venv
--source venv/bin/activate..
--pip install -r requirements.txt..
--uvicorn app.main:app --reload..
+-source venv/bin/activate <br>
+-pip install -r requirements.txt <br>
+-uvicorn app.main:app --reload <br>
 
 CREATE .env file in project root
 SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
