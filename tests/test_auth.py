@@ -11,31 +11,37 @@ def test_user_registration(client):
     
     
 def test_duplicate_email(client):
-    response = client.post("/auth/register", json={"email": "un@gmail.com", "password": "1234"})
+    email = "test@gmail.com"
+    password = "MAIN123"
+    response = client.post("/auth/register", json={"email": email, "password": password})
     assert response.status_code == 200
-    response = client.post("/auth/register", json={"email": "un@gmail.com", "password": "1234"})
+    response = client.post("/auth/register", json={"email": email, "password": password})
     assert response.status_code == 409
     
 def test_invalid_login(client):
-    response = client.post("/auth/register", json={"email": "under@gmail.com", "password": "1234"})
+    response = client.post("/auth/register", json={"email": "first@gmail.com", "password": "FirstSon"})
     assert response.status_code == 200
-    response = client.post("/auth/login", json={"email": "undern@gmail.com", "password": "12345678"})
+    response = client.post("/auth/login", json={"email": "first@gmail.com", "password": "12345678"})
     assert response.status_code == 401
-    response = client.post("/auth/login", json={"email": "asw@gmail.com", "password": "1234"})
+    response = client.post("/auth/login", json={"email": "second@gmail.com", "password": "1234"})
     assert response.status_code == 401
     
 def test_successful_login(client) :
-    response = client.post("/auth/register", json={"email": "ace@gmail.com", "password" : "ace"})
+    email = "ace@gmail.com"
+    password = "AstarMS"
+    response = client.post("/auth/register", json={"email": email, "password" : password})
     assert response.status_code == 200
-    response = client.post("/auth/login", json={"email": "ace@gmail.com", "password" : "ace"})
+    response = client.post("/auth/login", json={"email": email, "password" : password})
     assert response.status_code == 200
     assert response.json()["token"] != None
     assert response.json()["refresh_token"] != None
     
 def test_refresh_token_revocation(client):
-    response = client.post("/auth/register", json={"email": "jokey@gmail.com" , "password" : "jokey"})
+    email = "jokey@gmail.com"
+    password = "jokey123"
+    response = client.post("/auth/register", json={"email": email, "password" : password})
     assert response.status_code == 200
-    response = client.post("/auth/login", json={"email": "jokey@gmail.com" , "password" : "jokey"})
+    response = client.post("/auth/login", json={"email": email, "password" : password})
     assert response.status_code == 200
     tk = response.json()["refresh_token"]
     response = client.post("/auth/refresh", json={"refresh_token" : tk})
@@ -45,9 +51,11 @@ def test_refresh_token_revocation(client):
     assert response.status_code == 401
     
 def test_logout_revocation(client):
-    response = client.post("/auth/register", json={"email": "logout_user@gmail.com", "password": "password123"})
+    email = "user@gmail.com"
+    password = "USER1234"
+    response = client.post("/auth/register", json={"email": email, "password": password})
     assert response.status_code == 200
-    response = client.post("/auth/login", json={"email": "logout_user@gmail.com", "password": "password123"})
+    response = client.post("/auth/login", json={"email": email, "password": password})
     assert response.status_code == 200
     tk = response.json()["refresh_token"]
 
