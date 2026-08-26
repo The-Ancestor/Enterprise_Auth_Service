@@ -48,13 +48,13 @@ A production-ready, test-driven authentication microservice built with **FastAPI
 
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/YOUR_GITHUB_USERNAME/Enterprise-Auth-Service.git](https://github.com/YOUR_GITHUB_USERNAME/Enterprise-Auth-Service.git)
-   cd Enterprise-Auth-Service
+   git clone [https://github.com/The-Ancestor/Enterprise_Auth_Service.git](https://github.com/The-Ancestor/Enterprise_Auth_Service.git)
+   cd Enterprise_Auth_Service
 
    python3 -m venv venv
--source venv/bin/activate
--pip install -r requirements.txt
--uvicorn app.main:app --reload
+-source venv/bin/activate..
+-pip install -r requirements.txt..
+-uvicorn app.main:app --reload..
 
 CREATE .env file in project root
 SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
