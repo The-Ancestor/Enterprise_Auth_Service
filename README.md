@@ -22,3 +22,36 @@ A production-ready, test-driven authentication microservice built with **FastAPI
 ---
 
 ## Authentication & Token Flow
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Framework** | [FastAPI](https://fastapi.tiangolo.com/) |
+| **ORM & Database** | [SQLAlchemy](https://www.sqlalchemy.org/) + SQLite / PostgreSQL |
+| **Data Validation** | [Pydantic v2](https://docs.pydantic.dev/latest/) |
+| **Cryptography & Auth** | `PyJWT`, `passlib[bcrypt]`, `secrets`, `hashlib` (SHA-256) |
+| **Config Management** | `python-dotenv` |
+| **Test Automation** | `pytest`, `httpx` |
+
+---
+
+## Setup & Local Installation
+
+### Prerequisites
+* Python 3.11+
+* Git
+
+### Installation Steps
+
+1. **Clone the Repository**:
+   ```bash
+   git clone [https://github.com/YOUR_GITHUB_USERNAME/Enterprise-Auth-Service.git](https://github.com/YOUR_GITHUB_USERNAME/Enterprise-Auth-Service.git)
+   cd Enterprise-Auth-Service
+
+   python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
