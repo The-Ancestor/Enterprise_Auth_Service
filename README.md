@@ -52,9 +52,15 @@ A production-ready, test-driven authentication microservice built with **FastAPI
    cd Enterprise-Auth-Service
 
    python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+-source venv/bin/activate
+-pip install -r requirements.txt
+-uvicorn app.main:app --reload
+
+CREATE .env file in project root
+SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+DATABASE_URL=sqlite:///./sql_app.db
 
 tests/test_auth.py::test_user_registration PASSED                       [ 14%]
 tests/test_auth.py::test_duplicate_email PASSED                         [ 28%]
