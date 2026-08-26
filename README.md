@@ -8,6 +8,8 @@
 
 A production-ready, test-driven authentication microservice built with **FastAPI**, **SQLAlchemy**, and **Pydantic v2**. Designed around zero-trust security patterns, stateless JWT authorization, stateful refresh token rotation, single-use token revocation, and device telemetry tracking.
 
+LIVE SWAGGER UI : https://enterprise-auth-service.onrender.com/docs
+
 ---
 
 ## Architecture & Security Blueprint
