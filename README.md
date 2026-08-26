@@ -71,3 +71,6 @@ tests/test_auth.py::test_logout_revocation PASSED                       [ 85%] <
 tests/test_profile.py::test_profile_success PASSED                      [100%] <br>
 
 ========================= 7 passed in 2.43s =========================
+
+
+![Build Status](https://github.com/The-Ancestor/Enterprise_Auth_Service/actions/workflows/ci.yml/badge.svg)
