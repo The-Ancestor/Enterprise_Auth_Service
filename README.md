@@ -55,3 +55,13 @@ A production-ready, test-driven authentication microservice built with **FastAPI
 source venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
+
+tests/test_auth.py::test_user_registration PASSED                       [ 14%]
+tests/test_auth.py::test_duplicate_email PASSED                         [ 28%]
+tests/test_auth.py::test_invalid_login PASSED                           [ 42%]
+tests/test_auth.py::test_successful_login PASSED                        [ 57%]
+tests/test_auth.py::test_refresh_token_revocation PASSED                [ 71%]
+tests/test_auth.py::test_logout_revocation PASSED                       [ 85%]
+tests/test_profile.py::test_profile_success PASSED                      [100%]
+
+========================= 7 passed in 2.43s =========================
