@@ -62,12 +62,12 @@ ALGORITHM=HS256 <br>
 ACCESS_TOKEN_EXPIRE_MINUTES=30 <br>
 DATABASE_URL=sqlite:///./sql_app.db <br>
 
-tests/test_auth.py::test_user_registration PASSED                       [ 14%]
-tests/test_auth.py::test_duplicate_email PASSED                         [ 28%]
-tests/test_auth.py::test_invalid_login PASSED                           [ 42%]
-tests/test_auth.py::test_successful_login PASSED                        [ 57%]
-tests/test_auth.py::test_refresh_token_revocation PASSED                [ 71%]
-tests/test_auth.py::test_logout_revocation PASSED                       [ 85%]
-tests/test_profile.py::test_profile_success PASSED                      [100%]
+tests/test_auth.py::test_user_registration PASSED                       [ 14%] <br>
+tests/test_auth.py::test_duplicate_email PASSED                         [ 28%] <br>
+tests/test_auth.py::test_invalid_login PASSED                           [ 42%] <br>
+tests/test_auth.py::test_successful_login PASSED                        [ 57%] <br>
+tests/test_auth.py::test_refresh_token_revocation PASSED                [ 71%] <br>
+tests/test_auth.py::test_logout_revocation PASSED                       [ 85%] <br>
+tests/test_profile.py::test_profile_success PASSED                      [100%] <br>
 
 ========================= 7 passed in 2.43s =========================
