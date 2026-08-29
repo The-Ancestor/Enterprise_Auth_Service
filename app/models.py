@@ -9,6 +9,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     sessions = relationship("UserSession", back_populates="user", cascade="all, delete-orphan")
+    posts = relationship("Posts", back_populates="user", cascade="all, delete-orphan")
 
 
 class UserSession(Base):
@@ -21,3 +22,10 @@ class UserSession(Base):
     user_agent = Column(String, nullable=True) 
     user = relationship("User", back_populates="sessions")
 
+class Posts(Base):
+      __tablename__ = "posts"
+      id = Column(Integer, primary_key=True)
+      user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+      comment = Column(String, nullable=False)
+      user = relationship("User", back_populates="posts")
+      

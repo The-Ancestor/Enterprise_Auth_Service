@@ -10,8 +10,16 @@ class UserLogin(BaseModel) :
       password : str     
       
 class UserResponse(BaseModel) :
+      id : int
       email : str
       
+class UserPost(BaseModel) :
+      comment : str
+   
+class PostResponse(BaseModel) :
+      id : int
+      comment : str
+   
 class Token(BaseModel) :
       token : str
       refresh_token : str

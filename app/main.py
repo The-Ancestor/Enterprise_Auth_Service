@@ -4,8 +4,9 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from app.database import Base, engine, SessionLocal
+import app.models as models
 
-
+Base.metadata.create_all(bind=engine)
 limiter = Limiter(key_func=get_remote_address)
 
 @asynccontextmanager
@@ -25,7 +26,6 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-Base.metadata.create_all(bind=engine)
 
 from app.routers import auth
 app.include_router(auth.router)
