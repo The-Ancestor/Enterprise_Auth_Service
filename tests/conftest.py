@@ -22,7 +22,7 @@ TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
 @pytest.fixture(autouse=True)
 def disable_limiter():
-    limiter.enabled = False
+    limiter.enabled = True
     yield
     limiter.enabled = True
 

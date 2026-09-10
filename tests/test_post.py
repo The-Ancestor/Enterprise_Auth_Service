@@ -6,7 +6,7 @@ async def test_new_post(client) :
     email = "test@gmail.com"
     password = "test1234"
     
-    response = await client.post("/auth/register", json={"email" : email, "password" : password}, headers={"x-idempotency-key": "test-key-12345"})
+    response = await client.post("/auth/register", json={"email" : email, "password" : password}, headers={"x-idempotency-key": "test-ky-2345"})
     assert response.status_code == 200
     
     response = await client.post("/auth/login", json={"email" : email, "password" : password})
@@ -22,7 +22,7 @@ async def test_get_user_post_successful(client) :
     email = "test@gmail.com"
     password = "test1234"
     
-    response = await client.post("/auth/register", json={"email" : email, "password" : password}, headers={"x-idempotency-key": "test-key-12345"})
+    response = await client.post("/auth/register", json={"email" : email, "password" : password}, headers={"x-idempotency-key": "testkey-1345"})
     assert response.status_code == 200
     id = response.json()["id"]
     
@@ -43,7 +43,7 @@ async def test_get_user_post_successful(client) :
     assert posts[0]["comment"] == "NEW COMMENT"
    
     
-"""async def test_get_user_post_unsuccessful(client) :
+async def test_get_user_post_unsuccessful(client) :
     email = "test@gmail.com"
     password = "test1234"
     email2 = "test2@gmail.com"
@@ -68,4 +68,3 @@ async def test_get_user_post_successful(client) :
     
     response = await client.get(f"/auth/posts/{id}", headers=headers)
     assert response.status_code == 403
-"""    

@@ -1,4 +1,4 @@
-"""async def test_profile_success(client):
+async def test_profile_success(client):
     email = "test@gmail.com"
     password = "Pytest1234"
     response = await client.post("/auth/register", json={"email" : email, "password" : password}, headers={"x-idempotency-key": "test-key-123459"})
@@ -14,4 +14,3 @@
     assert data["email"] == email
     assert len(data["sessions"]) == 1
     assert data["sessions"][0]["user_agent"] == "PytestClient/1.0"
-"""

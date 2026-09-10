@@ -26,9 +26,6 @@ async def get_redis() -> AsyncGenerator[aioredis.Redis, None]:
         raise RuntimeError("Redis client has not been initialized.")
     yield _redis_client
 
-async def get_redis() -> AsyncGenerator[aioredis.Redis, None]:
-    yield redis_client
-
 async def get_db():
     async with AsyncSessionLocal() as db:
         yield db
@@ -36,9 +33,9 @@ async def get_db():
 async def handle_idempotency(x_idempotency_key: str = Header(...), redis_client = Depends(get_redis)):
     redis_key = f"idempotency_key:{x_idempotency_key}"
     
-    acquired = await redis_client.get(redis_key)
+    acquired = await redis_client.get(redis_key) # We map if the key already exists in our RAM 
     
-    if acquired and acquired == "PROCESSING":
+    if acquired and acquired == "PROCESSING": # KEY FOUND BUT PROCESS NOT DONE... SO WE DROP THE REQUEST 
         raise HTTPException(
             status_code=409,
             detail="Email registration already in progress"
@@ -47,7 +44,7 @@ async def handle_idempotency(x_idempotency_key: str = Header(...), redis_client 
     if acquired and acquired != "PROCESSING":
         return redis_key
          
-    ac = await redis_client.set(redis_key, "PROCESSING", nx=True, ex=60)
+    ac = await redis_client.set(redis_key, "PROCESSING", nx=True, ex=60) # KEY WILL HAVE A LIFETIME OF 60 SECONDS
     if not ac:
         raise HTTPException(
             status_code=409, 
@@ -65,10 +62,10 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db : A
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get("sub")
+        username = payload.get("sub") # String format here
         if username is None:
             raise credentials_exception
-        info_id = int(username)
+        info_id = int(username) # Change it to integer so we can find the User via id in the DB 
     except InvalidTokenError:
         raise credentials_exception
     result = await db.execute(select(User).where(User.id == info_id))
